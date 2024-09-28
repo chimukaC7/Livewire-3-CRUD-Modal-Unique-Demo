@@ -30,27 +30,27 @@
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                                @forelse($products as $product)
-                                    <tr class="bg-white">
-                                        <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                            {{ $product->name }}
-                                        </td>
-                                        <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                            {{ $product->description }}
-                                        </td>
-                                        <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                            <x-secondary-button wire:click="$dispatch('openModal', { component: 'product-modal', arguments: { product: {{ $product }} }})">
-                                                Edit
-                                            </x-secondary-button>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr class="bg-white">
-                                        <td colspan="3" class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                            No products found.
-                                        </td>
-                                    </tr>
-                                @endforelse
+                            @forelse($products as $product)
+                                <tr class="bg-white">
+                                    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                                        {{ $product->name }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                                        {{ $product->description }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                                        <x-secondary-button wire:click="$dispatch('openModal', { component: 'product-modal', arguments: { product: {{ $product }} }})">
+                                            Edit
+                                        </x-secondary-button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr class="bg-white">
+                                    <td colspan="3" class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                                        No products found.
+                                    </td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
