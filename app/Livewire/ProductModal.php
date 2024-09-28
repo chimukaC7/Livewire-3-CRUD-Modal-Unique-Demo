@@ -4,23 +4,39 @@ namespace App\Livewire;
 
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
+use Illuminate\Validation\Rule;
 use LivewireUI\Modal\ModalComponent;
 
 class ProductModal extends ModalComponent
 {
-    public ?Product $product = null;
-    public Forms\ProductForm $form;
+    public Product $product;
 
-    public function mount(Product $product = null): void
+    public function rules(): array
     {
-        if ($product->exists) {
-            $this->form->setProduct($product);
-        }
+        return [
+            'product.name' => [
+                'required',
+                Rule::unique('products', 'name')->ignore($this->product),
+            ],
+            'product.description' => [
+                'required'
+            ],
+        ];
+    }
+
+    public function mount(Product $product): void
+    {
+        $this->product = $product ?? new Product();
     }
 
     public function save(): void
     {
-        $this->form->save();
+        $this->validate();
+
+        $this->product->save();
+
+        $this->reset();
+
 
         $this->closeModal();
 
